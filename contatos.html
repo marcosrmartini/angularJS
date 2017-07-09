@@ -47,6 +47,7 @@
 
 			$scope.adicionarContato = function (contato) {
 				$http.post("http://localhost:3412/contatos", contato).then(function(result){
+					console.log(result.data);
 					delete $scope.contato;	
 					$scope.contatoForm.$setPristine();
 					carregarContatos();
@@ -61,7 +62,11 @@
 			};
 			$scope.isContatoSelecionado = function (contatos) {
 				return $scope.contatos.some(function(contato){
-					return contato.selecionado;
+					if (contato == null) {
+						return false;
+					} else {
+						return contato.selecionado;
+					}
 				});
 			};
 			$scope.ordenarPor = function (campo) {
